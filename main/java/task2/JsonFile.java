@@ -10,13 +10,14 @@ public class JsonFile implements Serializable {
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     public static void userToJson() throws IOException {
         String json;
-        try (BufferedReader reader = new BufferedReader(new FileReader("/Users/Tanya/Downloads/modul10/src/main/java/task2/file1.txt"))) {
+        String file = "/Users/Tanya/Downloads/modul10/src/main/java/task2/file1.txt";
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line = reader.readLine();
             List<User> users = new ArrayList<>();
             while ((line = reader.readLine()) != null) {
                 User user = new User();
                 String[] array = line.trim().split(" ");
-                if (array.length == 2 && array[0] != null && Integer.parseInt(array[1]) > 0) {
+                if (array.length == 2 && array[0] != null && !array[0].isEmpty() && !array[1].isEmpty() && Integer.parseInt(array[1]) > 0) {
                     user.setName(array[0]);
                     user.setAge(Integer.parseInt(array[1]));
                     users.add(user);
@@ -31,8 +32,7 @@ public class JsonFile implements Serializable {
     }
             public static void main (String[]args) throws IOException {
 
-                JsonFile jsonFile = new JsonFile(); jsonFile.userToJson();
-
-
+                JsonFile jsonFile = new JsonFile();
+                jsonFile.userToJson();
             }
         }
