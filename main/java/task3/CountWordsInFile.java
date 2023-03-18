@@ -13,12 +13,11 @@ public class CountWordsInFile {
     public static void main(String[] args) throws IOException {
 
         String file = "./src/main/java/task3/file2.txt";
-
         Map<String ,Integer> count = countWords(file);
 
-        for (Map.Entry<String, Integer> text: count.entrySet()) {
-            System.out.println(text.getKey() + " " + text.getValue());
-        }
+        count.entrySet().stream()
+                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+                .forEach(entry -> System.out.println(entry.getKey() + " " + entry.getValue()));
 
     }
    public static Map<String, Integer> countWords(String filePath) throws IOException {
